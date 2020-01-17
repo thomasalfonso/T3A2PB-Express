@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router();
+const UserController = require('../controllers/user_controller')
 
-router.get('/', (req,res)=>{res.json('winner')})
+router.get('/', UserController.ProductIndex)
 
 module.exports=router;
