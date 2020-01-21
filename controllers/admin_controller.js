@@ -6,6 +6,12 @@ async function Test (req,res){
     res.json('hello')
 }
 
+
+async function AdminPost (req,res){
+    res.json(req.body)
+}
+
 module.exports={
-    Test
+    Test,
+    AdminPost
 }
