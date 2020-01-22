@@ -12,4 +12,6 @@ router.put('/product', AdminController.ProductUpdate)
 router.patch('/product', AdminController.ProductUpdate)
 router.delete('/product', AdminController.ProductDelete)
 
+
+
 module.exports=router;
