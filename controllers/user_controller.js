@@ -1,6 +1,6 @@
 const ProductModel = require('../database/models/product_model')
 
-async function ProductIndex (req,res){
+async function ProductIndex (req, res, next){
     const Products = await ProductModel.find()
     const DummyProducts = [
         {_id:'1', name: 'Extra Virgin Olive Oil 250ml', price: 11.00, count: 10, available: true },
@@ -10,7 +10,7 @@ async function ProductIndex (req,res){
         {_id:'5', name: 'Jar of Black Olives 200g', price: 8.00, count: 10, available: true },
         {_id:'6', name: 'Jar of Green Olives 200g', price: 8.00, count: 10, available: true }
     ]
-    res.json(DummyProducts);
+    res.json(Products);
 }
 
 module.exports = {
