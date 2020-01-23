@@ -4,22 +4,6 @@ const {celebrate, Joi} = require('celebrate');
 const AdminController = require('../controllers/admin_controller');
 
 
-//Admin Login
-router.post('/login', celebrate({
-    body: {
-        email: Joi.string().required(),
-        password: Joi.string().required()
-    }
-}), AdminController.AdminLogin)
-
-//Admin Create
-router.post('/create', celebrate({
-    body: {
-        email: Joi.string().required(),
-        password: Joi.string().required()
-    }
-}), AdminController.AdminCreate)
-
 //Product CUD
 router.post('/product', celebrate({
     body: {

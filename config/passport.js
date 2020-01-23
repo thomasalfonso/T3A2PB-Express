@@ -8,13 +8,11 @@ passport.use(new JwtStrategy({
     },
     async (jwt_payload, done) => {
         try{
-            const user = await UserModel.findById(jwt_payload.sub);
-
-            if (!user) {
+            const admin = await AdminModel.findById(jwt_payload.sub);
+            if (!admin) {
                 return done(null, false);
             }
-
-            return done(null, user);           
+            return done(null, admin);           
         } catch (error) {
             return done(error);
         }
