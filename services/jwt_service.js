@@ -1,13 +1,14 @@
 const JWT = require('jsonwebtoken');
-const expiry = '1m';
 
 function generateToken(admin){
     const Token = JWT.sign(
         {
-            sub:admin._id,
-            expiresIn: expiry
+            sub:admin._id
         }, 
-        process.env.JWT_SECRET
+        process.env.JWT_SECRET,
+        {
+            expiresIn: 60 * 2
+        }
     )
     return Token;
 }

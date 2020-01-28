@@ -41,4 +41,7 @@ router.delete('/product', celebrate({
     }
 }), AdminController.ProductDelete)
 
+//Order GET
+router.get('/order', AdminController.OrderGet)
+
 module.exports=router;

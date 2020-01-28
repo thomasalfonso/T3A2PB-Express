@@ -21,8 +21,14 @@ async function ProductDelete(req,res){
     res.redirect('/user')
 }
 
+async function OrderGet(req,res){
+    const Orders = await OrderModel.find();
+    res.json(Orders);
+}
+
 module.exports={
     ProductCreate,
     ProductUpdate,
-    ProductDelete
+    ProductDelete,
+    OrderGet
 }
