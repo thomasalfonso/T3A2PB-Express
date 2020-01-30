@@ -11,6 +11,16 @@ const ProductSchema = new Schema({
         required: true,
         trim: true
     },
+    size: {
+        type: String,
+        required: true,
+        trim: true
+    },
+    description:{
+        type: String,
+        required: true,
+        trim: true
+    },
     count: {
         type: Number,
         required: true,

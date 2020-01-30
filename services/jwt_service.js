@@ -7,7 +7,7 @@ function generateToken(admin){
         }, 
         process.env.JWT_SECRET,
         {
-            expiresIn: 60 * 2
+            expiresIn: 60 * 60
         }
     )
     return Token;

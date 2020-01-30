@@ -35,11 +35,7 @@ router.patch('/product', celebrate({
     }
 }), AdminController.ProductUpdate)
 
-router.delete('/product', celebrate({
-    body:{
-        id: Joi.string().required()     
-    }
-}), AdminController.ProductDelete)
+router.delete('/product/:id',AdminController.ProductDelete)
 
 //Order GET
 router.get('/order', AdminController.OrderGet)

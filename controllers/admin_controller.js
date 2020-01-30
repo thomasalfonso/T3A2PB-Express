@@ -4,21 +4,22 @@ const OrderModel = require('../database/models/order_model');
 ///Products
 
 async function ProductCreate(req,res){
-    const {name,price,count,available} = req.body;
-    await ProductModel.create({name,price,count,available})
+    const {name,price,count,available, description, size} = req.body;
+    await ProductModel.create({name,price,count,available, description, size})
     res.redirect('/user')
 }
 
 async function ProductUpdate(req,res){
-    const {name,price,count,available, id} = req.body;
-    await ProductModel.findByIdAndUpdate(id, {name,price,count,available});
+    const {name,price,count,available, description, size,id} = req.body;
+    await ProductModel.findByIdAndUpdate(id, {name,price,count,available, description, size});
     res.redirect('/user')
 }
 
 async function ProductDelete(req,res){
-    const {id} = req.body;
+    const {id} = req.params;
     await ProductModel.findByIdAndDelete(id);
-    res.redirect('/user')
+    const Products = await ProductModel.find();
+    res.json(Products)
 }
 
 async function OrderGet(req,res){
