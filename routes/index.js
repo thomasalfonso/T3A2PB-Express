@@ -8,7 +8,7 @@ const PaymentRoutes = require('./payment_routes');
 
 router.use('/user', UserRoutes);
 router.use('/admin', Passport.authenticate('jwt',{session:false}) , AdminRoutes);
-router.use('/payment',PaymentRoutes);
+router.use('/orders',PaymentRoutes);
 router.use('/auth', AuthRoutes);
 
 
