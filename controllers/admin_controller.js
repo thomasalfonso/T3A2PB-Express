@@ -27,9 +27,17 @@ async function OrderGet(req,res){
     res.json(Orders);
 }
 
+async function OrderPut (req, res){
+    const {_id, resolved} = req.body
+    await OrderModel.findByIdAndUpdate(_id, {resolved})
+    const Orders = await OrderModel.find(); 
+    res.json(Orders);
+}
+
 module.exports={
     ProductCreate,
     ProductUpdate,
     ProductDelete,
-    OrderGet
+    OrderGet,
+    OrderPut
 }
