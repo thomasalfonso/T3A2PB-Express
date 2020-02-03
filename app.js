@@ -1,7 +1,9 @@
-const express = require('express')
+const express = require('express');
 const app = express();
-const cors = require('cors')
-const {passport}=require('./config/passport')
+const cors = require('cors');
+const multer = require('multer');
+const morgan = require('morgan');
+const {passport}=require('./config/passport');
 
 //Parses incoming data
 app.use(express.urlencoded({extended: true}));
@@ -18,6 +20,7 @@ app.use(require('./routes'));
 
 //Error handling middleware
 app.use(require('./middleware/error_handling'));
+app.use(morgan(':method :url :status :response-time ms - :res[content-length]'))
 
 
 module.exports = app;
