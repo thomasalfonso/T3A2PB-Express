@@ -8,6 +8,7 @@ const AdminController = require('../controllers/admin_controller');
 router.post('/product', celebrate({
     body: {
         name: Joi.string().required(),
+        size: Joi.string().required(),
         price: Joi.number().min(0).required(),
         count: Joi.number().min(0).required(),
         available: Joi.boolean().required()
@@ -17,6 +18,7 @@ router.post('/product', celebrate({
 router.put('/product', celebrate({
     body:{
         id: Joi.string().required(),
+        size: Joi.string().required(),
         name: Joi.string().required(),
         price: Joi.number().min(0).required(),
         count: Joi.number().min(0).required(),

@@ -30,6 +30,11 @@ const ProductSchema = new Schema({
         type: Boolean,
         required: true,
         trim: true
+    },
+    image: {
+        type: String,
+        required: true,
+            default: process.env.DEFAULT_IMAGE
     }
 })
 
