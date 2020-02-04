@@ -40,4 +40,6 @@ router.delete('/product/:id',AdminController.ProductDelete)
 //Order GET
 router.get('/order', AdminController.OrderGet)
 
+router.put('/order', AdminController.OrderPut)
+
 module.exports=router;
