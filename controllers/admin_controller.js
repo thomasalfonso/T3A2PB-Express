@@ -2,17 +2,30 @@ const ProductModel = require('../database/models/product_model');
 const OrderModel = require('../database/models/order_model');
 
 ///Products
-
 async function ProductCreate(req,res){
     const {name,price,count,available, description, size} = req.body;
-    await ProductModel.create({name,price,count,available, description, size})
-    res.redirect('/user')
+    let status, error;
+    try{
+        await ProductModel.create({name,price,count,available, description, size})
+        status='success'
+    } catch (err){
+        status='fail'
+        error=err
+    }
+    res.json({error, status})
 }
 
 async function ProductUpdate(req,res){
-    const {name,price,count,available, description, size,id} = req.body;
-    await ProductModel.findByIdAndUpdate(id, {name,price,count,available, description, size});
-    res.redirect('/user')
+    const {name,price,count,available, description, size, id} = req.body;
+    let status, error;
+    try {
+        await ProductModel.findByIdAndUpdate(id, {name,price,count,available, description, size});
+        status='success'
+    } catch (err){
+        status='fail'
+        error=err
+    }
+    res.json({error, status})
 }
 
 async function ProductDelete(req,res){

@@ -11,31 +11,26 @@ router.post('/product', celebrate({
         size: Joi.string().required(),
         price: Joi.number().min(0).required(),
         count: Joi.number().min(0).required(),
-        available: Joi.boolean().required()
+        available: Joi.boolean().required(),
+        description: Joi.string().required(),
+        size: Joi.string().required()
     }
 }), AdminController.ProductCreate)
 
-router.put('/product', celebrate({
+router.put('/product'
+, celebrate({
     body:{
         id: Joi.string().required(),
         size: Joi.string().required(),
         name: Joi.string().required(),
         price: Joi.number().min(0).required(),
+        size: Joi.string().required(),
         count: Joi.number().min(0).required(),
-        available: Joi.boolean().required()     
+        available: Joi.boolean().required(),
+        description: Joi.string().required()
     }
-}),AdminController.ProductUpdate)
-
-
-router.patch('/product', celebrate({
-    body:{
-        id: Joi.string().required(),
-        name: Joi.string().required(),
-        price: Joi.number().min(0).required(),
-        count: Joi.number().min(0).required(),
-        available: Joi.boolean().required()     
-    }
-}), AdminController.ProductUpdate)
+})
+,AdminController.ProductUpdate)
 
 router.delete('/product/:id',AdminController.ProductDelete)
 
