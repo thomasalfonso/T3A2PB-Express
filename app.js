@@ -5,6 +5,8 @@ const multer = require('multer');
 const morgan = require('morgan');
 const {passport}=require('./config/passport');
 
+require('dotenv').config()
+
 //Parses incoming data
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
