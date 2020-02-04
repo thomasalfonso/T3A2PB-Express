@@ -25,10 +25,7 @@ const upload = multer({
 //Setup the POST route to upload a file
 // router.post('/', ImageController.uploadImage);
 
-router.post('/', upload.single('file'), function (req, res, next) {
-    console.log(req.file);
-    res.send("");
-  })
+router.post('/', upload.single('file'), ImageController.uploadImage)
 
 // POST image
 

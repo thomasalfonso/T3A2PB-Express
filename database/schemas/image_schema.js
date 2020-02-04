@@ -2,14 +2,10 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const ImageSchema = new Schema({
-    img: {
-        type: String,
-        required: true,
-      },
-    ref: {
+    key: {
         type: String,
         required: true,
     }
 });
 
-module.exports = ContactSchema;
+module.exports = ImageSchema;
