@@ -3,16 +3,13 @@ const Stripe = require('stripe')('sk_test_VWeSFEavpdGwJn64EtFWbJL100krkSzPeM')
 const UniqueKey = require('uuid/v4');
 
 async function Checkout(req,res){
-    let status;
-    let error;
+    let status, error;
     try {
-        // console.log(req.body)
         const {product, token} = req.body;
         const customer = await Stripe.customers.create({
             email: token.email,
             source: token.id
-        }) 
-        const idempotencyKey = UniqueKey();
+        });
         const charge = await Stripe.charges.create({
             amount: product.price * 100,
             currency: 'aud',
@@ -30,13 +27,8 @@ async function Checkout(req,res){
                     postal_code: token.card.address_zip
                 }
             }
-        },
-        { idempotencyKey }
-        )
-        if(charge.status!=='succeeded' && charge.paid!==true){
-            throw new Error('Charge did not succeed');
-        }
-
+        }, {idempotencyKey:UniqueKey()});
+        if(charge.status!=='succeeded' && charge.paid!==true){throw new Error('Charge did not succeed')};
         OrderModel.create({
             email: charge.receipt_email,
             name: charge.source.name,
@@ -50,11 +42,10 @@ async function Checkout(req,res){
             amount: charge.amount,
             receipt_url: charge.receipt_url,
         });
-        // console.log('Charge:', {charge});
         status='success';
     } catch (err){
-        console.error('Error:', {err})
-        status='failure';
+        error = err;
+        status='fail';
     }
     res.json({error, status})
 }

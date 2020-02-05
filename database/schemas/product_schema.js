@@ -34,7 +34,7 @@ const ProductSchema = new Schema({
     image: {
         type: String,
         required: true,
-            default: process.env.DEFAULT_IMAGE
+        default: process.env.DEFAULT_IMAGE
     }
 })
 

@@ -3,21 +3,24 @@ const JWTService = require('../services/jwt_service');
 
 async function AdminCreate (req,res){
     const {email, password} = req.body;
-    const Admin = await AdminModel.create({email, password});
+    await AdminModel.create({email, password});
     const AdminAccounts = await AdminModel.find();
     res.json(AdminAccounts);
 }
 
 async function AdminLogin (req,res){
     const {email, password} = req.body;
-    const Admin = await AdminModel.findOne({email});
-    const valid = await Admin.verifyPassword(password);
-    if (valid){
-        const token = JWTService.generateToken(Admin)
-        res.json({token});
-    } else {
-        res.json('fail')
+    let status, error, token;
+    try {
+        const Admin = await AdminModel.findOne({email});
+        const valid = await Admin.verifyPassword(password);
+        if (valid){ token = JWTService.generateToken(Admin)} 
+        else {throw new Error('Invalid Token')}
+    } catch (err){
+        status = 'fail';
+        error = err;
     }
+    res.json({error, status, token})
 }
 
 
