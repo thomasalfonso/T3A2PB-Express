@@ -16,7 +16,7 @@ const upload = multer({
         cb(null, Date.now().toString())
       }
     })
-  })
+})
 
 
 //Product CUD
@@ -32,8 +32,7 @@ router.post('/product', celebrate({
     }
 }), AdminController.ProductCreate)
 
-router.put('/product'
-, celebrate({
+router.put('/product', celebrate({
     body:{
         id: Joi.string().required(),
         size: Joi.string().required(),
@@ -45,19 +44,25 @@ router.put('/product'
         description: Joi.string().required()
     }
 })
-,AdminController.ProductUpdate)
+,AdminController.ProductUpdate);
 
-router.delete('/product/:id',AdminController.ProductDelete)
+router.delete('/product/:id',AdminController.ProductDelete);
 
 //Orders
-router.get('/order', AdminController.OrderGet)
+router.get('/order', AdminController.OrderGet);
 
-router.put('/order', AdminController.OrderPut)
+router.put('/order', celebrate({
+    body:{
+      _id: Joi.string().required(),
+      resolved: Joi.boolean().required()
+    }
+}),AdminController.OrderPut);
 
 //Image
-router.post('/image', upload.single('file'), AdminController.ImageUpload)
-
-// const { validateImage } = require("./../middleware/celebrate");
-// celebrate(validateImage);
+router.post('/image', upload.single('file'), celebrate({
+  body:{
+    id: Joi.string().required()
+  }
+}),AdminController.ImageUpload);
 
 module.exports=router;

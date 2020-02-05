@@ -15,8 +15,15 @@ async function ProductIndex (req, res){
 
 async function ImageShow (req, res) {
     const { id } = req.params;
-    const stream = s3.getObject({Key: id, Bucket:process.env.S3_BUCKET_NAME}).createReadStream()
-    stream.pipe(res);
+    let status, error;
+    try {
+        const stream = s3.getObject({Key: id, Bucket:process.env.S3_BUCKET_NAME}).createReadStream()    
+        stream.pipe(res);
+    } catch (err){
+        status = 'fail';
+        error = err;
+        res.json({error, status})
+    };
   }
 
 module.exports = {

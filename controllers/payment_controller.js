@@ -5,18 +5,19 @@ const UniqueKey = require('uuid/v4');
 async function Checkout(req,res){
     let status, error;
     try {
-        const {product, token} = req.body;
+        const {tokenId, description, total} = req.body;
+        const token = await Stripe.tokens.retrieve(`${tokenId}`);
         const customer = await Stripe.customers.create({
             email: token.email,
             source: token.id
         });
         const charge = await Stripe.charges.create({
-            amount: product.price * 100,
+            amount: total * 100,
             currency: 'aud',
             customer: customer.id,
             receipt_email: token.email,
             description: `Purchased ${
-                product.name}`,
+                description}`,
             shipping: {
                 name: token.card.name,
                 address: {
