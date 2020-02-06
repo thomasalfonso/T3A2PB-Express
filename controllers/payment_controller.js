@@ -1,5 +1,5 @@
 const OrderModel = require('../database/models/order_model');
-const Stripe = require('stripe')('sk_test_VWeSFEavpdGwJn64EtFWbJL100krkSzPeM')
+const Stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 const UniqueKey = require('uuid/v4');
 
 async function Checkout(req,res){

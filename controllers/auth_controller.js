@@ -1,13 +1,6 @@
 const AdminModel = require('../database/models/admin_model');
 const JWTService = require('../services/jwt_service');
 
-async function AdminCreate (req,res){
-    const {email, password} = req.body;
-    await AdminModel.create({email, password});
-    const AdminAccounts = await AdminModel.find();
-    res.json(AdminAccounts);
-}
-
 async function AdminLogin (req,res){
     const {email, password} = req.body;
     let status, error, token;
@@ -25,6 +18,5 @@ async function AdminLogin (req,res){
 
 
 module.exports={
-    AdminLogin,
-    AdminCreate
+    AdminLogin
 }

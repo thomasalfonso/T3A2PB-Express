@@ -11,12 +11,4 @@ router.post('/login', celebrate({
     }
 }), AuthController.AdminLogin)
 
-//Admin Create
-router.post('/create', celebrate({
-    body: {
-        email: Joi.string().required(),
-        password: Joi.string().required()
-    }
-}), AuthController.AdminCreate)
-
 module.exports=router;
